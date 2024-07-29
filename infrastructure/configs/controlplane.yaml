@@ -1,0 +1,26 @@
+machine:
+  features:
+    rbac: true # Enable role-based access control (RBAC).
+    stableHostname: true # Enable stable default hostname.
+    kubernetesTalosAPIAccess:
+      enabled: true
+      allowedRoles:
+        - os:operator
+        - os:reader
+      allowedKubernetesNamespaces:
+        - talos-system
+        - kube-system
+        
+  network:
+    interfaces:
+      - deviceSelector:
+            physical: true
+        vip:
+          ip: "${talos_virtual_ip}"
+    nameservers:
+      - "${dns_server}" 
+cluster:
+  externalCloudProvider:
+    enabled: true
+    manifests:
+    - https://raw.githubusercontent.com/siderolabs/talos-cloud-controller-manager/main/docs/deploy/cloud-controller-manager.yml

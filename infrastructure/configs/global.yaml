@@ -1,0 +1,11 @@
+machine:
+  network:
+    nameservers:
+      - "${dns_server}"
+  kubelet:
+    extraArgs:
+      cloud-provider: external
+  features:
+    kubePrism:
+      enabled: true
+      port: 7445

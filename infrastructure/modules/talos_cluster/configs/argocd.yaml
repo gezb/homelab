@@ -1,0 +1,66 @@
+cluster:
+  extraManifests:
+  -  ${argocdmanifest}
+  inlineManifests:  
+  - name: argocd-namespaces
+    contents: |-
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: argocd
+  - name: argocd-repo-secret
+    contents: |-
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: argocd-repo
+        namespace: argocd
+        labels:
+          argocd.argoproj.io/secret-type: repository
+      stringData:
+        url: ${argocdrepo}
+  - name: argo-project
+    contents: |-
+        apiVersion: argoproj.io/v1alpha1
+        kind: AppProject
+        metadata:
+          name: argocd
+          namespace: argocd
+          finalizers:
+            - resources-finalizer.argocd.argoproj.io
+        spec:
+          clusterResourceWhitelist:
+          - group: '*'
+            kind: '*'
+          sourceRepos:
+          - https://github.com/gezb/homelab.git
+          destinations:
+          - namespace: argocd
+            server: https://kubernetes.default.svc
+            name: in-cluster
+  - name: argo-app
+    contents: |-
+        apiVersion: argoproj.io/v1alpha1
+        kind: Application
+        metadata:
+          name: argo
+          namespace: argocd
+        spec:
+          project: argocd
+          source:
+            repoURL: ${argocdrepo}
+            targetRevision: HEAD 
+            path: ${argocdprojectpath}
+            directory:
+              recurse: false
+              include: '*.yaml'
+          destination:
+            namespace: argocd
+            server: https://kubernetes.default.svc
+          syncPolicy:
+            automated: 
+              prune: false 
+              selfHeal: true 
+          revisionHistoryLimit: 1
+  
+

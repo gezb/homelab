@@ -1,0 +1,17 @@
+# Vendored kube-prometheus files
+gitops/vault-cluster/monitoring/kube-prometheus/vendor
+gitops/homelab-cluster/monitoring/kube-prometheus/vendor
+
+
+## Terraform
+
+# Terraform directory
+.terraform
+
+# Terraform State
+terraform.tfstate*
+
+# Terraform Variables
+*.tfvars
+
+

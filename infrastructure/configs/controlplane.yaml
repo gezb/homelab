@@ -1,0 +1,42 @@
+machine:
+  features:
+    rbac: true # Enable role-based access control (RBAC).
+    stableHostname: true # Enable stable default hostname.
+    kubernetesTalosAPIAccess:
+      enabled: true
+      allowedRoles:
+        - os:operator
+        - os:reader
+      allowedKubernetesNamespaces:
+        - talos-system
+        - kube-system
+        
+  network:
+    interfaces:
+      - deviceSelector:
+            physical: true
+        vip:
+          ip: "${talos_virtual_ip}"
+cluster:
+  externalCloudProvider:
+    enabled: true
+    manifests:
+    - https://raw.githubusercontent.com/siderolabs/talos-cloud-controller-manager/main/docs/deploy/cloud-controller-manager.yml
+
+  inlineManifests:
+  - name: csi-proxmox-namespaces
+    contents: |-
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: csi-proxmox
+  - name: proxmox-csi-plugin
+    contents: |-
+      apiVersion: v1
+      kind: Secret
+      type: Opaque
+      metadata:
+        name: proxmox-csi-plugin
+        namespace: csi-proxmox
+      data:
+        config.yaml: ${base64encode(clusters)}

@@ -1,0 +1,9 @@
+machine:
+  kubelet:
+    extraArgs:
+      cloud-provider: external
+      # rotate-server-certificates: true
+  features:
+    kubePrism:
+      enabled: true
+      port: 7445

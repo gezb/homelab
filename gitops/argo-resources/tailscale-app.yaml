@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: tailscale-resources
+  namespace: argocd
+spec:
+  project: tailscale
+  source:
+    repoURL: https://github.com/gezb/homelab.git
+    targetRevision: HEAD
+    path: gitops/tailscale-resources
+    directory:
+      recurse: false
+      include: '*.yaml'
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: tailscale
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+  revisionHistoryLimit: 1

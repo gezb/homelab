@@ -1,4 +1,4 @@
-# IAC and Gitops for my k8s cluster run by Talo
+# IAC and Gitops for my k8s cluster run by Talos Linux
 
 Still very much WIP at this point...
 

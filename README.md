@@ -7,4 +7,4 @@ The cluster that gets stood up is not publicly accessisble - Access to services 
 
 ## Cluster Creation
 
-The terraform provided in the `infrastructure` bootstraps a [Talos] Kurbernetes cluster using terraform and optionally installs ArgoCD and bootsraps it using the repo specifed
+The terraform provided in the `infrastructure` bootstraps a [Talos](https://www.talos.dev/) Kurbernetes cluster using terraform and optionally installs ArgoCD and bootsraps it using the repo specifed

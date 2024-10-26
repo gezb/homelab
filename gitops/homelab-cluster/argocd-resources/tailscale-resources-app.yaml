@@ -4,7 +4,7 @@ metadata:
   name: tailscale-resources
   namespace: argocd
 spec:
-  project: tailscale-resources
+  project: tailscale
   source:
     repoURL: https://github.com/gezb/homelab.git
     targetRevision: HEAD

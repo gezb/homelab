@@ -4565,6 +4565,9 @@ spec:
                     - mountPath: /oauth
                       name: oauth
                       readOnly: true
+            resources:
+              limits:
+                squat.ai/tun: "1"
             nodeSelector:
                 kubernetes.io/os: linux
             serviceAccountName: operator

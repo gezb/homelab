@@ -37,7 +37,6 @@ variable "talos_version" {
 }
 variable "talos_image_factory_schematic_id" {
   type    = string
-  default = "ce4c980550dd2ab1b17bbf2b08801c7eb59418eafe8f279833297925d67c7515" #  QEumu Guest Addons
 }
 
 # Kubernetes Cluster

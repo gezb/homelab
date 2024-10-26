@@ -127,6 +127,7 @@ resource "talos_machine_configuration_apply" "controlplane" {
     templatefile("${path.module}/configs/global.yaml", {
       dns_server = var.dns_server
     }),
+    templatefile("${path.module}/configs/enable_tun.yaml", {}),
     templatefile("${path.module}/configs/controlplane.yaml", {
       dns_server = var.dns_server
       talos_virtual_ip = var.controlplane_virtual_ip

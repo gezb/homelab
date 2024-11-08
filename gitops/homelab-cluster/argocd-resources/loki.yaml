@@ -1,9 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: loki
+  name: loki-application
 spec:
-  project: loki
+  project: monitoring
   source:
     chart: loki
     repoURL: https://grafana.github.io/helm-charts

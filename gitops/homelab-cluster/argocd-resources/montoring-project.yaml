@@ -8,6 +8,7 @@ metadata:
 spec:
   sourceRepos:
   - https://github.com/gezb/homelab.git
+  - https://grafana.github.io/helm-charts
   destinations:
   - namespace: monitoring
     server: https://kubernetes.default.svc

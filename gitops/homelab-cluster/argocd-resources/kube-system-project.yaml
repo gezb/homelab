@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: kube-system
+  namespace: kube-system
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  sourceRepos:
+  - https://github.com/gezb/homelab.git
+  destinations:
+  - namespace: kube-system
+    server: https://kubernetes.default.svc
+    name: in-cluster
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  # Enables namespace orphaned resource monitoring.
+  orphanedResources:
+    warn: true

@@ -10,4 +10,7 @@ spec:
       port:
         name: https
   ingressClassName: tailscale
+  tls:
+    - hosts:
+        - argocd
  

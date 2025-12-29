@@ -6,9 +6,9 @@ resources:
   - resources/secretstore.yaml
 
 helmCharts:
-  - name: external-secerts
-    repo: https://charts.external-secerts.io
+  - name: external-secrets
+    repo: https://charts.external-secrets.io
     version: 1.2.0
     releaseName: external-secrets
-    namespace: external-secerts
+    namespace: external-secrets
     valuesFile: values.yaml

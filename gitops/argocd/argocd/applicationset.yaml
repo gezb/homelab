@@ -13,6 +13,7 @@ spec:
       directories:
       - path: gitops/argocd/*
       - path: gitops/kube-system/*
+      - path: gitops/external-secrets/*
       values:
         base_dir: "{{index .path.segments 0}}"
         namespace_dir: "{{index .path.segments 1}}"

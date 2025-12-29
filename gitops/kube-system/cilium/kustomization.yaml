@@ -1,0 +1,9 @@
+
+helmCharts:
+  - name: argo-cd
+    repo: https://helm.cilium.io
+    version: 1.18.5
+    releaseName: cilium
+    namespace: kube-system
+    valuesFile: values.yml
+    includeCRDs: true

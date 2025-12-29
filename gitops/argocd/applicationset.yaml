@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: apps
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/gezb/homelab
+      revision: HEAD
+      directories:
+      - path: gitops/argocd
+      #- path: gitops/kube-system/*
+
+  template:
+    metadata:
+      name: '{{path.basename}}'
+      namespace: argocd
+    spec:
+      project: default
+      source:
+        plugin:
+          name: kustomize-build-with-helm
+        repoURL: https://github.com/gezb/homelab
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        retry:
+          limit: 5
+          backoff:
+            duration: 5s
+            factor: 2
+            maxDuration: 3m
+        syncOptions:
+        - ServerSideApply=true
+        - RespectIgnoreDifferences=true
+        - ApplyOutOfSyncOnly=true
+        - Replace=false
+        - IgnoreMissingTemplate=true

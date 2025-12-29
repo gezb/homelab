@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    argocd.argoproj.io/secret-type: repository
+  name: homelab-repo
+  namespace: argocd
+stringData:
+  type: git
+  url: https://github.com/gezb/homelab
+type: Opaque

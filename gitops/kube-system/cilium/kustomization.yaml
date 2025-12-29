@@ -1,6 +1,6 @@
 
 helmCharts:
-  - name: argo-cd
+  - name: cilium
     repo: https://helm.cilium.io
     version: 1.18.5
     releaseName: cilium

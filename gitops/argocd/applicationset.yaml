@@ -10,7 +10,7 @@ spec:
       revision: HEAD
       directories:
       - path: gitops/argocd
-      #- path: gitops/kube-system/*
+      - path: gitops/kube-system/*
 
   template:
     metadata:

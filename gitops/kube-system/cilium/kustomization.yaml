@@ -5,5 +5,5 @@ helmCharts:
     version: 1.18.5
     releaseName: cilium
     namespace: kube-system
-    valuesFile: values.yml
+    valuesFile: values.yaml
     includeCRDs: true

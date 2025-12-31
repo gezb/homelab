@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - resources/namespace.yaml
   - resources/oauth-client-secret.yaml
-  - resources/proxy-group.yaml
 
 helmCharts:
   - name: tailscale-operator

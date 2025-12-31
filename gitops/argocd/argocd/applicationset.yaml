@@ -15,6 +15,7 @@ spec:
       - path: gitops/kube-system/*
       - path: gitops/external-secrets/*
       - path: gitops/longhorn-system/*
+      - path: gitops/tailscale/*
       values:
         base_dir: "{{index .path.segments 0}}"
         namespace_dir: "{{index .path.segments 1}}"

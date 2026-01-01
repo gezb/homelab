@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - resources/namespace.yaml
+  - resources/crds.yaml
+  - resources/controller.yaml
+  - resources/server-plan.yaml
+  - resources/agent-plan.yaml

@@ -16,6 +16,7 @@ spec:
       - path: gitops/external-secrets/*
       - path: gitops/longhorn-system/*
       - path: gitops/tailscale/*
+      - path: gitops/system-upgrade/* 
       values:
         base_dir: "{{index .path.segments 0}}"
         namespace_dir: "{{index .path.segments 1}}"

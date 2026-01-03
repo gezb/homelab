@@ -1,11 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+resources:
+  - resources/ip-pool.yaml
+
 helmCharts:
-  - name: cilium
-    repo: https://helm.cilium.io
-    version: 1.18.5
-    releaseName: cilium
+  - name: metallb
+    repo: https://metallb.github.io/metallb
+    version: 0.15.3
+    releaseName: metallb
     namespace: kube-system
     valuesFile: values.yaml
     includeCRDs: true

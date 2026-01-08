@@ -14,7 +14,6 @@ spec:
       - path: gitops/argocd/*
       - path: gitops/kube-system/*
       - path: gitops/external-secrets/*
-      - path: gitops/longhorn-system/*
       - path: gitops/tailscale/*
       - path: gitops/system-upgrade/* 
       values:

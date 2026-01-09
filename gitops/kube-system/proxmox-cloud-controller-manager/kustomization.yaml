@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - resources/ccm-homelab-seceret.yaml
+
+helmCharts:
+  - name: proxmox-cloud-controller-manager
+    repo: oci://ghcr.io/sergelogvinov/charts
+    version: 0.2.24
+    releaseName: proxmox-cloud-controller-manager
+    namespace: kube-system
+    valuesFile: values.yaml

@@ -1,0 +1,34 @@
+# proxmox-ccm.yaml
+
+config:
+  clusters:
+    - url: https://192.168.1.21:8006/api2/json
+      insecure: false
+      token_id_file: /run/secrets/ccm-homelab/token_id
+      token_secret_file: /run/secrets/ccm-homelab/token_secret
+      region: homelab
+
+enabledControllers:
+  - cloud-node
+  - cloud-node-lifecycle
+
+# Deploy CCM only on control-plane nodes
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+tolerations:
+  - key: node-role.kubernetes.io/control-plane
+    effect: NoSchedule
+
+extraVolumes:
+  - name: ccm-homelab
+    secret:
+      secretName: ccm-homelab
+extraVolumeMounts:
+  - name: ccm-homelab
+    readOnly: true
+    mountPath: "/run/secrets/ccm-homelab"

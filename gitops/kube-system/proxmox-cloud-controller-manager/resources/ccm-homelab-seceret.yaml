@@ -2,6 +2,7 @@ apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
   name: ccm-homelab
+  namespace: kube-system
 spec:
   secretStoreRef:
     kind: ClusterSecretStore

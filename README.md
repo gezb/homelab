@@ -5,8 +5,11 @@
     - [Bootstrap steps](#bootstrap-steps)
       - [First control plane node](#first-control-plane-node)
       - [Join Further Control Plane Nodes](#join-further-control-plane-nodes)
+      - [Taint the control plane nodes to stop workloads running on them](#taint-the-control-plane-nodes-to-stop-workloads-running-on-them)
       - [Join Worker node(s)](#join-worker-nodes)
       - [Deploy ArgoCD](#deploy-argocd)
+      - [Increase CoreDNS replicas to two](#increase-coredns-replicas-to-two)
+    - [Kubernetes upgrades](#kubernetes-upgrades)
 
 This repo holds the GitOps for my homelab Kubernetes cluster
 
@@ -77,6 +80,21 @@ You should then see in the CCM logs the node will be fully labeled.
 
 Join the other control plane nodes with the following command
 
+#### Taint the control plane nodes to stop workloads running on them
+
+Apply the taint `node-role.kubernetes.io/master:NoSchedule` to control plane nodes
+
+```bash
+kubectl taint node CONTROL_PLANE_NODE_NAME node-role.kubernetes.io/master:NoSchedule
+```
+
+There wwill have been workloads scheduled on the first control plane node while we were gettung the CCM working, Drain thie off the node
+
+```bash
+kubectl drain k3s-control-plane-1  --ignore-daemonsets --delete-emptydir-data
+kubectl uncordon k3s-control-plane-1
+```
+
 #### Join Worker node(s)
 
 ```bash
@@ -90,3 +108,26 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=latest sh -s agent \
 ```
 
 #### Deploy ArgoCD
+
+Now we have the base infrastructure in a good place  we can deploy argocd which will start applying changes from git rather than us applying changes locally
+
+```bash
+kubectl kustomize --enable-helm gitops/argocd/argocd/ | kubectl apply -f -
+```
+
+#### Increase CoreDNS replicas to two
+
+This is done so that is still avaiable when doing node upgrades
+
+```bash
+kubectl edit deployments.apps -n kube-system coredns
+```
+
+Update `replicas` to 2
+
+### Kubernetes upgrades
+
+I use [System Upgrade Controller](https://github.com/rancher/system-upgrade-controller) for upgrades.  
+
+To trigger a upgrades update `server-plan.yaml` and `agent-plan.yaml` in `/gitops/system-upgrade/system-upgrade-controller/resources`  and set version to the required version of K3s and commit. Argo will sync and the controller wil spawn jobs to upgrade K3s
+W

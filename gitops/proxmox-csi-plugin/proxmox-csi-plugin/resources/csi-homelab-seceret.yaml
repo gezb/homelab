@@ -1,0 +1,20 @@
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: csi-homelab
+  namespace: proxmox-csi
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: doppler-auth-api
+
+  target:
+    name: csi-homelab
+
+  data:
+    - secretKey: token_id
+      remoteRef:
+        key: PROXMOX_CSI_USER
+    - secretKey: token_secret
+      remoteRef:
+        key: PROXMOX_CSI_TOKEN

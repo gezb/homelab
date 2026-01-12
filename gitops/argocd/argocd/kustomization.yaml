@@ -12,4 +12,7 @@ helmCharts:
     version: 9.2.3
     releaseName: "argocd"
     namespace: argocd
+    apiVersions:
+    - monitoring.coreos.com/v1
     valuesFile: values.yaml
+  

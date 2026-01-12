@@ -11,5 +11,7 @@ helmCharts:
     version: 1.2.0
     releaseName: external-secrets
     namespace: external-secrets
+    apiVersions:
+    - monitoring.coreos.com/v1
     valuesFile: values.yaml
     includeCRDs: true

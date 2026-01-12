@@ -80,9 +80,9 @@ storageClass:
 controller:
   # -- Annotations for controller pod.
   # ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
-  podAnnotations: {}
-    # prometheus.io/scrape: "true"
-    # prometheus.io/port: "8080"
+  podAnnotations: 
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8080"
 
   # -- Labels for controller pod.
   # ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -308,7 +308,7 @@ updateStrategy:
 # -- Prometheus metrics
 metrics:
   # -- Enable Prometheus metrics.
-  enabled: false
+  enabled: true
   # -- Prometheus metrics port.
   port: 8080
 

@@ -243,7 +243,7 @@ resources: {}
 
 serviceMonitor:
   # -- Specifies whether to create a ServiceMonitor resource for collecting Prometheus metrics
-  enabled: false
+  enabled: true
 
   # -- How should we react to missing CRD "`monitoring.coreos.com/v1/ServiceMonitor`"
   #
@@ -319,7 +319,7 @@ metrics:
 
 grafanaDashboard:
   # -- If true creates a Grafana dashboard.
-  enabled: false
+  enabled: true
 
   # -- Label that ConfigMaps should have to be loaded as dashboards.
   sidecarLabel: "grafana_dashboard"

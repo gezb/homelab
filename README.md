@@ -40,13 +40,13 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_CHANNEL=latest sh -s - \
 
 And reterive the KUBECONFIG file
 
-1. Remove the `node.cloudprovider.kubernetes.io/uninitialized=true:NoSchedule` taint - This would normally be done by the Cloud Controller Manager as part of labeling the nodes but we need to do it manually to get the Proxmox CCM running (We will reset this taint once the CCM is running)
+2. Remove the `node.cloudprovider.kubernetes.io/uninitialized=true:NoSchedule` taint - This would normally be done by the Cloud Controller Manager as part of labeling the nodes but we need to do it manually to get the Proxmox CCM running (We will reset this taint once the CCM is running)
 
 ```bash
 kubectl taint node k3s-control-plane-1 node.cloudprovider.kubernetes.io/uninitialized=true:NoSchedule-
 ```
 
-1. Deploy Cilium CNI
+3. Deploy Cilium CNI
 
 ```bash
 kubectl kustomize --enable-helm gitops/kube-system/cilium/ | kubectl apply -f -
@@ -54,7 +54,7 @@ kubectl kustomize --enable-helm gitops/kube-system/cilium/ | kubectl apply -f -
 
 At this point the one control plane node status should go to "Ready"
 
-1. Deploy [External Secrets Operator](https://external-secrets.io/)  - I am using [Doppler](https://www.doppler.com/) to manage my secerts for my cluster and use Extenal Secrets to pull the secrets into the cluster
+4. Deploy [External Secrets Operator](https://external-secrets.io/)  - I am using [Doppler](https://www.doppler.com/) to manage my secerts for my cluster and use Extenal Secrets to pull the secrets into the cluster
 
 ```bash
 kubectl kustomize --enable-helm gitops/external-secrets/external-secrets/ | kubectl create -f -
@@ -62,7 +62,7 @@ kubectl kustomize --enable-helm gitops/external-secrets/external-secrets/ | kube
 kubectl apply -f secrets/doppler-api-token.yaml
 ```
 
-1. Deploy [proxmox-cloud-controller-manager](https://github.com/sergelogvinov/proxmox-cloud-controller-manager/)
+4. Deploy [proxmox-cloud-controller-manager](https://github.com/sergelogvinov/proxmox-cloud-controller-manager/)
 
 ```bash
 kubectl kustomize --enable-helm gitops/kube-system/proxmox-cloud-controller-manager/ | kubectl apply -f -
@@ -130,4 +130,3 @@ Update `replicas` to 2
 I use [System Upgrade Controller](https://github.com/rancher/system-upgrade-controller) for upgrades.  
 
 To trigger a upgrades update `server-plan.yaml` and `agent-plan.yaml` in `/gitops/system-upgrade/system-upgrade-controller/resources`  and set version to the required version of K3s and commit. Argo will sync and the controller wil spawn jobs to upgrade K3s
-W

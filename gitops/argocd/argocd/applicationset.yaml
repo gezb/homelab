@@ -13,11 +13,10 @@ spec:
       directories:
       - path: gitops/argocd/*
       - path: gitops/kube-system/*
-      - path: gitops/external-secrets/*
-      - path: gitops/tailscale/*
-      - path: gitops/system-upgrade/* 
-      - path: gitops/proxmox-csi-proxmox/* 
-      - path: gitops/monitoring/* 
+      #- path: gitops/external-secrets/*
+      #- path: gitops/tailscale/*
+      #- path: gitops/proxmox-csi-proxmox/* 
+      #- path: gitops/monitoring/* 
       values:
         base_dir: "{{index .path.segments 0}}"
         namespace_dir: "{{index .path.segments 1}}"

@@ -4,10 +4,10 @@ kind: Kustomization
 helmCharts:
   - name: cilium
     repo: https://helm.cilium.io
-    version: 1.18.5
+    version: 1.20.4
     releaseName: cilium
     namespace: kube-system
-    apiVersions:
-    - monitoring.coreos.com/v1
+    #apiVersions:
+    #- monitoring.coreos.com/v1
     valuesFile: values.yaml
     includeCRDs: true

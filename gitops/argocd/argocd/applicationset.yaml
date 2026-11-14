@@ -13,7 +13,7 @@ spec:
       directories:
       - path: gitops/argocd/*
       - path: gitops/kube-system/*
-      #- path: gitops/external-secrets/*
+      - path: gitops/external-secrets/*
       #- path: gitops/tailscale/*
       #- path: gitops/proxmox-csi-proxmox/* 
       #- path: gitops/monitoring/* 

@@ -69,7 +69,7 @@ config:
 
 # -- Storage class definition.
 storageClass:
-  - name: proxmox-data-xfs
+  - name: proxmox-data
     storage: zfs
     reclaimPolicy: Delete
     fstype: xfs

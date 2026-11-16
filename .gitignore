@@ -1,3 +1,4 @@
 gitops/**/charts
 
 secrets/*
+omni/cluster/boostrap-yaml/proxmox-ccm-secret.yaml

@@ -15,7 +15,7 @@ spec:
       - path: gitops/kube-system/*
       - path: gitops/external-secrets/*
       #- path: gitops/tailscale/*
-      - path: gitops/proxmox-csi-proxmox/*
+      - path: gitops/proxmox-csi-plugin/*
       #- path: gitops/monitoring/* 
       values:
         base_dir: "{{index .path.segments 0}}"

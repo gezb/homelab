@@ -3362,7 +3362,7 @@ repoServer:
   resources:
     limits:
       cpu: 50m
-      memory: 128Mi
+      memory: 256Mi
     requests:
       cpu: 10m
       memory: 64Mi

@@ -27,8 +27,6 @@ spec:
     spec:
       project: default
       source:
-        plugin:
-          name: kustomize-build-with-helm
         repoURL: https://github.com/gezb/homelab
         targetRevision: HEAD
         path: "{{.path.path}}"

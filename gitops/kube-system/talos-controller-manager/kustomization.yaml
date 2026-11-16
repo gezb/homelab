@@ -4,7 +4,7 @@ kind: Kustomization
 helmCharts:
   - name: talos-cloud-controller-manager
     repo:  oci://ghcr.io/siderolabs/charts/talos-cloud-controller-manager
-    version: 1.14.0
+    version: 0.5.8
     releaseName: talos-cloud-controller-manager
     namespace: kube-system
     valuesFile: values.yaml
